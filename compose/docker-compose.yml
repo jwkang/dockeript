@@ -1,0 +1,15 @@
+version: '2'
+services:
+  ubuntu: #SWPLATFORM
+    image: ubuntu_new:latest
+    container_name: ubuntu-jwkang2
+    hostname: ubuntu-slave
+    privileged: true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /volume1/SSD/work:/home/jwkang2/work
+    ports:
+      - "5122:22"
+      - "5180:8080"
+    restart: always
+    tty: true

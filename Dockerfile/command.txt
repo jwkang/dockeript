@@ -1,0 +1,3 @@
+# Make ubuntu_jw images with tag-14.04 from the Dockerfile
+
+sudo docker build -t ubuntu_jw:14.04 -f Dockerfiile .

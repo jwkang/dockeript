@@ -1,0 +1,2 @@
+# ssh jwkang2@asuscomm.com -p 5122
+sudo docker-compose up -d ubuntu

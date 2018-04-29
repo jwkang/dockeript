@@ -1,0 +1,32 @@
+FROM ubuntu:14.04
+
+RUN apt-get update
+RUN apt-get update && apt-get install -y openssh-server vim
+
+RUN echo 'root:1q2w3e4r' | chpasswd 
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# SSH login fix. Otherwise user is kicked off after login
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+EXPOSE 22
+#CMD ["/usr/sbin/sshd", "-D"]
+
+# Make user & change uid for volumn
+RUN useradd -ms /bin/bash jwkang2
+RUN echo 'jwkang2:1q2w3e4r' | chpasswd
+RUN echo "jwkang2 ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
+# Note!! 1026 for krnomad-nas. This shall be checkeck before making image. Check what is the pid of the user of host 
+RUN sed -i 's,jwkang2:x:1000:1000::/home/jwkang2:/bin/bash,jwkang2:x:1026:1000::/home/jwkang2:/bin/bash,g' /etc/passwd
+RUN chown jwkang2:jwkang2 /home/jwkang2/.*
+
+USER jwkang2
+WORKDIR /home/jwkang2
+
+#RUN
+#ADD
+#VOLUME ??
+#WORKDIR
+#CMD
+#EXPOSE
+#ENTRYPOINT
