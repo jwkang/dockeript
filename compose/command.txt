@@ -1,2 +1,6 @@
 # ssh jwkang2@asuscomm.com -p 5122
 sudo docker-compose up -d ubuntu
+
+"enter.sh" is combination of docker-compose and docker command, which is used for enter docker container easily. 
+If no container exists, enter script will make a enw container at first, then try to enter the new container.
+

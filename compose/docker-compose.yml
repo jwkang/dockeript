@@ -13,3 +13,31 @@ services:
       - "5180:8080"
     restart: always
     tty: true
+
+  android: 
+    image: krnomad/android_oreo_ndk:latest
+    container_name: android-oreo
+    hostname: android-build-slave
+    privileged: true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /volume1/SSD/work:/home/jwkang2/test
+    ports:
+      - "5123:22"
+      - "5181:8080"
+    restart: always
+    tty: true
+
+  notebook:
+    image: krnomad/jupyter:0.1
+    container_name: jupyter 
+    hostname: jw-jupyter-notebook 
+    privileged: true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /volume1/SSD/work:/home/beakerx/work
+    ports:
+      - "5124:22"
+      - "8888:8888"
+    restart: always
+    tty: true
