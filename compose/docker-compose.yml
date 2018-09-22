@@ -8,11 +8,10 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /volume1/SSD/work:/home/jwkang2/work
+    command : tail -f /dev/null
     ports:
       - "5122:22"
       - "5180:8080"
-    restart: always
-    tty: true
 
   android: 
     image: krnomad/android_oreo_ndk:latest
@@ -21,7 +20,7 @@ services:
     privileged: true
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /volume1/SSD/work:/home/jwkang2/test
+      - /volume1/SSD/work/android:/home/jwkang2/android
     ports:
       - "5123:22"
       - "5181:8080"
